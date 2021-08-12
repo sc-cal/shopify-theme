@@ -31,6 +31,7 @@
 
   <!-- CSS ================================================== -->
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'common.css' | asset_url | stylesheet_tag }}
 
   <script>
 
@@ -105,7 +106,9 @@
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ request.page_type | handle }}">
-  <h1>ぬくひテスト02　８月５日</h1>
+
+  <div id="wrapper">
+
   {% section 'header' %}
 
   <main class="wrapper main-content{% if request.page_type == blank %} main-content--no-template{% endif %}" role="main">
@@ -126,6 +129,6 @@
     <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
   </ul>
 
-
+</div>
 </body>
 </html>
