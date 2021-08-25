@@ -1,203 +1,106 @@
-{% capture theme_settings_link %}<a href="/admin/themes/{{ theme.id }}/settings">{{ 'layout.footer.theme_settings' | t }}</a>{% endcapture %}
-
-<footer class="site-footer small--text-center" role="contentinfo">
-  <div class="wrapper">
-
-    <div class="grid">
-
-    {% for block in section.blocks %}
-
-      {% case block.settings.width %}
-        {% when '16%' %}
-          {%- assign block_width = 'small--one-whole two-twelfths' -%}
-        {% when '25%' %}
-          {%- assign block_width = 'small--one-whole one-quarter' -%}
-        {% when '33%' %}
-          {%- assign block_width = 'small--one-whole one-third' -%}
-        {% when '50%' %}
-          {%- assign block_width = 'small--one-whole one-half' -%}
-        {% when '66%' %}
-          {%- assign block_width = 'small--one-whole two-thirds' -%}
-        {% when '75%' %}
-          {%- assign block_width = 'small--one-whole three-quarters' -%}
-        {% when '100%' %}
-          {%- assign block_width = 'one-whole' -%}
-      {% endcase %}
+{% capture theme_settings_link %}
+<!-- <a href="/admin/themes/{{ theme.id }}/settings">{{ 'layout.footer.theme_settings' | t }}</a>{% endcapture %} -->
 
 
-    <div class="grid-item {{ block_width }}">
-      {% if block.settings.title %}
-        <h3>{{ block.settings.title | escape }}</h3>
-      {% endif %}
-
-      {% case block.type %}
-
-        {% when 'menu' %}
-        <ul>
-          {% for link in linklists[block.settings.menu].links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-          {% else %}
-            {% capture theme_settings_footer_linklist_path %}<strong>Footer</strong> > <strong>Quick links link list</strong>{% endcapture %}
-            {{ 'layout.footer.instructions_for_linklist_html' | t: theme_settings_link: theme_settings_link, theme_settings_footer_linklist_path: theme_settings_footer_linklist_path }}
-          {% endfor %}
-        </ul>
-
-        {% when 'text' %}
-
-            {% if block.settings.richtext != blank %}
-              {{ block.settings.richtext }}
-            {% else %}
-              <p>{{ 'layout.footer.instructions_for_text_content_html' | t: theme_settings_link: theme_settings_link }}</p>
-            {% endif %}
-
-
-        {% when 'newsletter' %}
-          <div class="site-footer__newsletter-subtext">
-            {% if block.settings.subtext != blank %}
-              {{ block.settings.subtext }}
-            {% endif %}
-          </div>
-          {% include 'newsletter-form' with button: 'secondary' %}
-        {% endcase %}
-      </div>
-    {% endfor %}
-
-  </div>
-
-  {% if section.settings.social_enabled or section.settings.legal_menu != blank %}
-  <hr class="hr--small">
-  {% endif %}
-
-    <div class="grid">
-    {% if section.settings.legal_menu != blank %}
-      <div class="grid-item{% if section.settings.social_enabled %} large--two-fifths{% else %} one-whole text-center{% endif %}">
-
-          <ul class="legal-links inline-list">
-            {% for link in linklists[section.settings.legal_menu].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-      </div>
-      {% endif %}
-      {% if section.settings.social_enabled %}
-      <div class="grid-item{% if section.settings.legal_menu != blank %} large--three-fifths text-right{% else %} one-whole text-center{% endif %}">
-          <ul class="inline-list social-icons">
-             {% if settings.social_twitter_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_twitter_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Twitter' | escape }}">
-                   <span class="icon icon-twitter" aria-hidden="true"></span>
-                   <span class="fallback-text">Twitter</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_facebook_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_facebook_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Facebook' | escape }}">
-                   <span class="icon icon-facebook" aria-hidden="true"></span>
-                   <span class="fallback-text">Facebook</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_pinterest_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_pinterest_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Pinterest' | escape }}">
-                   <span class="icon icon-pinterest" aria-hidden="true"></span>
-                   <span class="fallback-text">Pinterest</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_google_plus_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_google_plus_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Google' | escape }}" rel="publisher">
-                   <span class="icon icon-google_plus" aria-hidden="true"></span>
-                   <span class="fallback-text">Google</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_instagram_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_instagram_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Instagram' | escape }}">
-                   <span class="icon icon-instagram" aria-hidden="true"></span>
-                   <span class="fallback-text">Instagram</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_snapchat_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_snapchat_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Snapchat' | escape }}">
-                   <span class="icon icon-snapchat" aria-hidden="true"></span>
-                   <span class="fallback-text">Snapchat</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_tumblr_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_tumblr_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Tumblr' | escape }}">
-                   <span class="icon icon-tumblr" aria-hidden="true"></span>
-                   <span class="fallback-text">Tumblr</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_youtube_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_youtube_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'YouTube' | escape }}">
-                   <span class="icon icon-youtube" aria-hidden="true"></span>
-                   <span class="fallback-text">YouTube</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_vimeo_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_vimeo_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Vimeo' | escape }}">
-                   <span class="icon icon-vimeo" aria-hidden="true"></span>
-                   <span class="fallback-text">Vimeo</span>
-                 </a>
-               </li>
-             {% endif %}
-             {% if settings.social_fancy_link != blank %}
-               <li>
-                 <a class="icon-fallback-text" href="{{ settings.social_fancy_link | escape }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Fancy' | escape }}">
-                   <span class="icon icon-fancy" aria-hidden="true"></span>
-                   <span class="fallback-text">Fancy</span>
-                 </a>
-               </li>
-             {% endif %}
-           </ul>
-        </div>
-      {% endif %}
-      </div>
-      <hr class="hr--small">
-      <div class="grid">
-      <div class="grid-item{% unless shop.enabled_payment_types == empty %} large--two-fifths{% endunless %}">
-          <ul class="legal-links inline-list">
-              <li>
-                &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}
-              </li>
-              <li>
-                {{ powered_by_link }}
-              </li>
-          </ul>
-      </div>
-
-      {%- if section.settings.show_payment_icons -%}
-        {%- unless shop.enabled_payment_types == empty -%}
-          <div class="grid-item large--three-fifths large--text-right">
-            <span class="visually-hidden">{{ 'general.payment.method' | t }}</span>
-            <ul class="inline-list payment-icons">
-              {%- for type in shop.enabled_payment_types -%}
-                <li>
-                  {{ type | payment_type_svg_tag: class: 'icon' }}
-                </li>
-              {%- endfor -%}
+<div class="edit-area links">
+        <div class="inner w960">
+            <ul>
+                <li><a href="/pages/howto"><span>はじめての方へ</span></a></li>
+                <li><a href="/blogs/voice" title=""><span>お客様の声</span></a></li>
+                <li><a href="/pages/qa" title=""><span>よくある質問</span></a></li>
             </ul>
-          </div>
-        {%- endunless -%}
-      {%- endif -%}
+        </div>
 
+        <!-- <div class="banner">
+          <a href="https://www.sc-cal.com/topics/2019/10/25/671/">
+            <img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/parts/banner02.jpg" alt="初回割引キャンペーン">
+          </a>
+        </div> -->
+
+        <div class="sample-box">
+            <dl>
+                <dt><span>無料サンプル</span>お送りいたします！</dt>
+                <dd>
+                    <div class="lefty">
+                        <p>お送りする資料</p>
+                        <ul>
+                            <li>・カレンダーサンプル <span>※3点まで</span></li>
+                            <!-- <li>・パンフレット</li> -->
+                            <li>・料金表</li>
+                            <li>・FAXご注文シート</li>
+                        </ul>
+                    </div>
+                    <div class="righty">
+                        <p class="t_center">お電話でのお問い合わせはこちら！</p>
+                        <a href="tel:0362337775" title=""><img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/footer/sample-box-img02.jpg" alt="03-6233-7775 営業時間 平日9:00-18:00"></a>
+                        <div><a href="https://www.sc-cal.com/contact/?entry=1" title=""><img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/footer/sample-box-img03.jpg" alt="WEBからのお申し込みはこちら"></a></div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
     </div>
 
-  </div>
+<footer class="site-footer small--text-center" role="contentinfo">
+  
 
+      
+        <div id="f_box">
+            <div id="pagetop" class="on"><a href="#wrapper"></a></div>
+
+
+
+          <div class="f_tel_box lefty">
+            <a class="f_logo" href="/"><img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/footer/f_logo_d.png" alt="卓カレ　運営ソフトコミュニケーションズ" width="187" height="71"></a>
+            <span class="f_tel"><img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/footer/f_tel.png" alt="03-6233-7775 営業時間 平日 9：00-18：00" width="187" height="41"></span>
+            <div class="btn01 pink mb10">
+              <a class="f_btn" href="https://www.sc-cal.com/contact/?entry=1" target="_blank">無料サンプル請求</a>
+            </div>
+            <!-- <div class="btn01 orange">
+              <a class="f_btn" href="/simulation/?t=m" target="_blank">お見積シミュレーション</a>
+            </div> -->
+          </div>
+          <div class="sitemap clearafterme pcmode">
+            <ul>
+              <li><a href="/pages/howto">はじめての方へ</a></li>
+              <!-- <li><a href="https://www.sc-cal.com/calendarcase/">タイプ（ケース）を選ぶ</a></li> -->
+              <li><a href="/collections/セミオーダータイプ">セミオーダープラン</a></li>
+              <li><a href="/collections/フルオーダープラン">フルオーダープラン</a></li>
+              <li><a href="/collections/データ入稿プラン">データ入稿プラン</a></li>
+              <!-- <li><a href="/price/">料金表</a></li> -->
+            </ul>
+            <ul>
+              <li><a href="https://www.sc-cal.com/contact/?entry=1">無料サンプル請求</a></li>
+              <!-- <li><a href="https://www.sc-cal.com/simulation/?t=m" target="_blank">お見積シミュレーション</a></li> -->
+              <li><a href="https://www.sc-cal.com/contact/?entry=2" target="_blank">お問合せフォーム</a></li>
+              <!-- <li><a href="https://www.sc-cal.com/order/" target="_blank">ご注文フォーム</a></li> -->
+            </ul>
+            <ul>
+              <li><a href="http://www.sc-design.biz/category.php?t=2&i=5" target="_blank" rel="nofollow">実績紹介</a></li>
+              <li><a href="/blogs/voice">お客様の声</a></li>
+              <li><a href="/pages/qa">よくある質問</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="yellow clearme">
+          <ul>
+            <li><a href="https://www.sofcom.co.jp/company/profile.php" target="_blank">運営会社情報</a> ｜ </li>
+            <li><a href="/pages/sitemap/">サイトマップ</a> ｜ </li>
+            <li><a href="/">オリジナル卓上カレンダー制作の卓カレ（ホーム）</a></li>
+          </ul>
+        </div>
+        <div class="disclaimer">
+          <p>当社卓上カレンダーサイトは、著作権登録済みとなっております。<br>類似した商品・ビジネスモデル、ホームページに記載されている写真・画像・キャッチ等についての無断記載を禁止します。</p>
+          <p>&#xa9;2019  Soft Communications Co.,Ltd.<br class="spmode">【存在事実証明 CopyTrust-G638 】</p>
+        </div>
+
+
+
+                
+
+
+
+
+    
 </footer>
 
 

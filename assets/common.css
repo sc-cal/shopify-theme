@@ -553,6 +553,7 @@ nav .nav-list > li {
     position:  relative;
     height: auto;
     cursor:  pointer;
+    width: 20%;
 }
 nav .nav-list .menu-item {
     z-index: 1000;
@@ -602,7 +603,7 @@ nav .nav-list > li a,
 nav .nav-list > li .nolink {
     display:  block;
     text-decoration:  none;
-    padding: 0 38.5px;
+    /* padding: 0 38.5px; */
     transition: background-color 0.3s ,color 0.3s;
     color: #1F1713;
 }
@@ -1184,11 +1185,11 @@ nav .nav-list li .sub-menu.type02 li a span {
         position: absolute;
         top: 5px;
         right: 54px;
-        background: url(../img/parts/tel-icon.png) no-repeat 50% 50%;
+        background: url(tel-icon.png) no-repeat 50% 50%;
     }
 
     .tel-btn a {
-        background: url(../img/parts/tel-icon.png) no-repeat 50% 50% / 30% auto;
+        background: url(tel-icon.png) no-repeat 50% 50% / 30% auto;
         background-color: #fff9e5;
         display: block;
         height: 100%;
@@ -1284,7 +1285,7 @@ nav .nav-list li .sub-menu.type02 li a span {
 }
 
 .btn01.mail a {
-    background-image: url(../img/parts/mail-icon.png);
+    background-image: url(mail-icon.png);
     background-repeat: no-repeat;
     background-position: 16% 50%;
 }
@@ -1369,7 +1370,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     }
 
     .btn01.mail:hover a {
-        background-image: url(../img/parts/mail-icon-orange.png);
+        background-image: url(mail-icon-orange.png);
     }
 
 }
@@ -1448,7 +1449,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     font-weight: 600;
 }
 .edit-area.voice.template h2 span {
-    background: url(../img/parts/voice-icon.png) no-repeat 0% 50%;
+    background: url(voice-icon.png) no-repeat 0% 50%;
     padding: 10px 0 10px 60px;
 }
 .edit-area.voice.template .post-list {}
@@ -1582,7 +1583,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     margin-bottom: 50px;
 }
 .edit-area.news.template .inner h2 span {
-    background: url(../img/parts/news-icon.png) no-repeat 0% 50%;
+    background: url(news-icon.png) no-repeat 0% 50%;
     padding: 10px 0 10px 60px;
 }
 .edit-area.news.template .tag-list {
@@ -1934,7 +1935,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     display: block;
     width: 296px;
     height: 118px;
-    background: url(../img/parts/design-txt01.png) no-repeat 50%;
+    background: url(design-txt01.png) no-repeat 50%;
 
     position: absolute;
     top: 0;
@@ -1991,7 +1992,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     display: block;
     width: 20px;
     height: 20px;
-    background: url(../img/parts/loupe-icon.png) no-repeat 50% 50% / cover;
+    background: url(loupe-icon.png) no-repeat 50% 50% / cover;
     position: absolute;
     bottom: 30px;
     right: 10px;
@@ -2077,7 +2078,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     display: block;
     width: 296px;
     height: 118px;
-    background: url(../img/parts/type-txt01.png) no-repeat 50%;
+    background: url(type-txt01.png) no-repeat 50%;
     position: absolute;
     top: 0;
     right: 0;
@@ -2112,7 +2113,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     display: block;
     width: 62px;
     height: 91px;
-    background: url(../img/parts/type-icon01.png) no-repeat 50%;
+    background: url(type-icon01.png) no-repeat 50%;
 
     position: absolute;
     top: -30px;
@@ -2120,7 +2121,7 @@ nav .nav-list li .sub-menu.type02 li a span {
     z-index: 1;
 }
 .edit-area.type ul li.no1:before {
-    background-image: url(../img/parts/type-icon02.png);
+    background-image: url(type-icon02.png);
 }
 
 .edit-area.type ul.type01 li {
@@ -2534,20 +2535,15 @@ nav .nav-list li .sub-menu.type02 li a span {
 .edit-area.links .inner {
     padding: 60px 0;
 }
-.edit-area.links .inner ul {}
-.edit-area.links .inner ul:after {
-    content: "";
-    display: block;
-    height: 0;
-    clear: both;
+.edit-area.links .inner ul {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
 }
 .edit-area.links .inner ul li {
     width: 23.5%;
     margin-right: 2%;
     float: left;
-}
-.edit-area.links .inner ul li:last-of-type {
-    margin-right: 0;
 }
 .edit-area.links .inner ul li a {
     display: block;
@@ -2594,16 +2590,16 @@ nav .nav-list li .sub-menu.type02 li a span {
 }
 
 .edit-area.links .inner ul li:nth-of-type(1) a span {
-    background-image: url(../img/footer/links-icon01.png);
+    background-image: url(footer_links-icon01.png);
 }
 .edit-area.links .inner ul li:nth-of-type(2) a span {
-    background-image: url(../img/footer/links-icon02.png);
+    background-image: url(footer_links-icon02.png);
 }
 .edit-area.links .inner ul li:nth-of-type(3) a span {
-    background-image: url(../img/footer/links-icon03.png);
+    background-image: url(footer_links-icon03.png);
 }
 .edit-area.links .inner ul li:nth-of-type(4) a span {
-    background-image: url(../img/footer/links-icon04.png);
+    background-image: url(footer_links-icon04.png);
 }
 
 
@@ -2663,14 +2659,14 @@ nav .nav-list li .sub-menu.type02 li a span {
 }
 .edit-area.links .sample-box dl dd .lefty p {
     margin: 0;
-    background: url(../img/footer/sample-box-icon01.png) no-repeat 0% 50% / auto 19px;
+    background: url(footer_sample-box-icon01.png) no-repeat 0% 50% / auto 19px;
     padding-left: 26px;
     font-size: 1.8rem;
     font-weight: 600;
     color: #f75663;
 }
 .edit-area.links .sample-box dl dd .lefty ul {
-    background: url(../img/footer/sample-box-img01.jpg) no-repeat 100% 50% / auto 100%;
+    background: url(footer_sample-box-img01.jpg) no-repeat 100% 50% / auto 100%;
     line-height: 1.6;
     font-weight: 600;
 }
@@ -2827,6 +2823,8 @@ nav .nav-list li .sub-menu.type02 li a span {
 footer{
     border-top: 1px solid #E6E6E6;
     position: relative;
+    padding: 0 !important;
+    background-color: transparent !important;
 }
 
 footer #f_box{
@@ -3178,11 +3176,11 @@ footer #pagetop a:after{
     }
     
     footer .f_tel_box .btn01 {
-        width: 49%;
-        float: left;
+        /* width: 49%; */
+        /* float: left; */
     }
     footer .f_tel_box .btn01:last-of-type {
-        float: right;
+        /* float: right; */
     }
     
     footer .f_tel_box .f_btn{
