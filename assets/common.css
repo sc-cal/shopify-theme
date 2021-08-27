@@ -338,7 +338,7 @@ a[href^="mailto:"] {
 ----------------------------------------------------------------*/
 
 
-header {
+header#header {
     width: 100%;
     margin: 0 auto;
     background-color: rgba(255,255,255,1);
@@ -348,31 +348,31 @@ header {
     z-index: 1000;
     border-bottom: solid 1px #DDD;
 }
-header .top_side {
+header#header .top_side {
     position: relative;
     max-width: 1080px;
     width: 96%;
     height: 100px;
     margin: 0 auto;
 }
-header .logomark {
+header#header .logomark {
     margin:  0 auto;
     position: absolute;
     top: 22px;
     left: 0;
     width: 330px;
 }
-header .logomark a {
+header#header .logomark a {
     display: block;
     position: relative;
 }
-header .logomark span {
+header#header .logomark span {
     font-size: 1.2rem;
     display: block;
     letter-spacing: 0;
     margin-bottom: 6px;
 }
-header .logomark .nen {
+header#header .logomark .nen {
     position: absolute;
     right: 4px;
     bottom: -2px;
@@ -382,10 +382,10 @@ header .logomark .nen {
     letter-spacing: 0;
     margin: 0;
 }
-.fixed header .logomark .nen {
+.fixed header#header .logomark .nen {
     right: 44px;
 }
-header .logomark a img {
+header#header .logomark a img {
     width: 136px;
     height: auto;
     display: block;
@@ -623,7 +623,7 @@ nav .nav-list li .sub-menu.type01 {
      display: none;
      position: absolute;
      top: 0;
-     left: -20%;
+     left: 0;
      text-align: left;
      width: 240px;
      background-color: #ed750f;
@@ -641,7 +641,7 @@ nav .nav-list li .sub-menu.type02 {
     padding: 60px 0 0;
     margin-top: 55px;
 }
-nav .nav-list li.hover .sub-menu {
+nav .nav-list li:hover .sub-menu {
     display: block;
     animation: show .4s linear 0s;
 }

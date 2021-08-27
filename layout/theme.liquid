@@ -32,6 +32,9 @@
   <!-- CSS ================================================== -->
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'common.css' | asset_url | stylesheet_tag }}
+  {{ page.handle | append: ".css" | asset_url | stylesheet_tag }}
+
+  {% include 'theme_uri' load: asset_url %}
 
   <script>
 
