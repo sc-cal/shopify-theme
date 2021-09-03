@@ -1,91 +1,110 @@
-<header id="header">
-      <div class="top_side">
+<header class="site-header" role="banner" data-section-id="{{ section.id }}" data-section-type="header-section">
+  <div class="wrapper">
 
-          <h1 class="logomark"><a href="/">
-              <span>オリジナル卓上カレンダー制作の&#60;卓カレ&#62;</span>
-              <img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/logomark.png" alt="2022年(令和4年)版オリジナル卓上カレンダー作成・制作「卓カレ」">
-              <span class="nen">2022年(令和4年)版</span>
-          </a></h1>
-          
-          <div class="contact_box pcmode">
-              <p>サンプル・お見積・<br>お問い合わせ承ります！</p>
-              <div>
-                  <span class="tel-link"><img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/header/tel-img.png" alt="03-6233-7775"></span>
-                  <span class="reception-time">営業時間　平日9:00～18:00</span>
+    <div class="grid--full">
+      <div class="grid-item large--one-half">
+        {% if request.page_type == 'index' %}
+          <h1 class="header-logo" itemscope itemtype="http://schema.org/Organization">
+        {% else %}
+          <div class="h1 header-logo" itemscope itemtype="http://schema.org/Organization">
+        {% endif %}
+          {% if section.settings.logo %}
+          {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+          {%- assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
+          <a href="{{ routes.root_url }}" itemprop="url">
+            <div class="lazyload__image-wrapper no-js header-logo__image" style="max-width:{{ section.settings.logo_max_width }}px;">
+              <div style="padding-top:{{ 1 | divided_by: section.settings.logo.aspect_ratio | times: 100}}%;">
+                <img class="lazyload js"
+                  data-src="{{ img_url }}"
+                  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                  data-aspectratio="{{ section.settings.logo.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ logo_alt | escape }}"
+                  style="width:{{ section.settings.logo_max_width }}px;">
               </div>
+            </div>
+            <noscript>
+              {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+              <img src="{{ section.settings.logo | img_url: image_size }}"
+                srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                alt="{{ logo_alt | escape }}"
+                itemprop="logo"
+                style="max-width:{{ section.settings.logo_max_width }}px;">
+            </noscript>
+          </a>
+          {% else %}
+            <a href="{{ routes.root_url }}" itemprop="url">{{ shop.name }}</a>
+          {% endif %}
+        {% if request.page_type == 'index' %}
+          </h1>
+        {% else %}
           </div>
-          <!-- <div class="btn01 blue02 arrow pcmode"><a href="https://www.sc-cal.com/order/"><span>ご注文</span></a></div> -->
-          <div class="btn01 orange arrow pcmode"><a href="/pages/contact"><span>お問い合わせ</span></a></div>
-          <div class="btn01 pink arrow pcmode"><a href="/cart/"><span>カートを見る</span></a></div>
+        {% endif %}
+      </div>
 
-          <!-- <ul class="site-map pcmode">
-              <li><a href="/simulation/" title="">ご注文</a></li>
-              <li><a href="https://www.sc-cal.com/contact/?entry=2" title="">お問い合わせ</a></li>
-          </ul> -->
+      <div class="grid-item large--one-half text-center large--text-right">
+        {% if section.settings.show_announcement or shop.customer_accounts_enabled %}
+          <div class="site-header--text-links{% if section.settings.announcement_text == blank %} medium-down--hide{% endif %}">
+            {% if section.settings.show_announcement %}
+              {% if section.settings.announcement_link != blank %}
+                <a href="{{ section.settings.announcement_link }}">
+              {% endif %}
 
+                <p>{{ section.settings.announcement_text | escape }}</p>
 
-          <button class="spmode c-hamburger c-hamburger--htx">
-              <span>toggle menu</span>
-          </button>
+              {% if section.settings.announcement_link != blank %}
+                </a>
+              {% endif %}
+            {% endif %}
 
-
-          <div class="tel-btn spmode">
-              <a href="tel:0362337775" title=""></a>
+            {% if shop.customer_accounts_enabled %}
+              <span class="site-header--meta-links medium-down--hide">
+                {% if customer %}
+                  {% capture first_name %}<a href="{{ routes.account_url }}">{{ customer.first_name }}</a>{% endcapture %}
+                  {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }} &middot; {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                {% else %}
+                  {{ 'layout.customer.sign_in' | t | customer_login_link }}
+                  <span class="site-header--spacer">{{ 'layout.customer.or' | t }}</span>
+                  {{ 'layout.customer.create_account' | t | customer_register_link }}
+                {% endif %}
+              </span>
+            {% endif %}
           </div>
-      </div><!-- top_side -->
 
-      <div class="bottom_side">
+          <br class="medium-down--hide">
+        {% endif %}
 
-          <nav id="header-nav" class="accordion-nav">
-              <ul id="menu-header" class="nav-list">
-                  <li class="menu-item"><a href="/"><span>ホーム</span></a></li>
-                  <li class="menu-item"><a href="/pages/howto"><span>はじめての方へ</span></a></li>
-                  <li onclick="" class="menu-item menu-item-has-children plan"><span class="nolink"><span>制作プラン</span></span>
-                      <div class="sub-menu type01">
-                          <ul>
-                              <li><a href="/collections/セミオーダータイプ">
-                                  <span>セミオーダープラン</span>
-                              </a></li>
-                              <li><a href="/collections/フルオーダープラン">
-                                  <span>フルオーダープラン</span>
-                              </a></li>
-                              <li><a href="/collections/データ入稿プラン">
-                                  <span>データ入稿プラン</span>
-                              </a></li>
-                          </ul>
-                      </div>
-                  </li>
-                  <!-- <li onclick="" class="menu-item menu-item-has-children case"><a href="/collections"><span>商品ラインナップ</span></a></li> -->
-                  <li class="menu-item"><a href="/pages/design"><span>デザイン</span></a></li>
-                  <!-- <li onclick="" class="menu-item menu-item-has-children"><span class="nolink"><span>ご料金</span></span>
-                      <div class="sub-menu type01">
-                          <ul>
-                              <li><a href="/price/">
-                                  <span>ご料金表</span>
-                              </a></li>
-                              <li><a href="/price/option.php">
-                                  <span>オプションについて</span>
-                              </a></li>
-                              <li><a href="https://www.sc-cal.com/simulation/?t=m">
-                                  <span>お見積シミュレーション</span>
-                              </a></li>
-                          </ul>
-                      </div>
-                  </li> -->
-              </ul>
+        {% include 'search-bar' %}
+
+        <a href="{{ routes.cart_url }}" class="header-cart-btn cart-toggle">
+          <span class="icon icon-cart"></span>
+          {{ 'layout.cart.cart' | t }} <span class="cart-count cart-badge--desktop {% if cart.item_count == 0 %}hidden-count{% endif %}">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div id="mobileNavBar">
+  <div class="display-table-cell">
+    <button class="menu-toggle mobileNavBar-link" aria-controls="navBar" aria-expanded="false"><span class="icon icon-hamburger" aria-hidden="true"></span>{{ 'layout.navigation.mobile_menu' | t }}</button>
+  </div>
+  <div class="display-table-cell">
+    <a href="{{ routes.cart_url }}" class="cart-toggle mobileNavBar-link">
+      <span class="icon icon-cart"></span>
+      {{ 'layout.cart.cart' | t }} <span class="cart-count {% if cart.item_count == 0 %}hidden-count{% endif %}">{{ cart.item_count }}</span>
+    </a>
+  </div>
+</div>
+
+<nav class="nav-bar" id="navBar" role="navigation">
+  <div class="wrapper">
+    {% include 'search-bar' %}
+    {% include 'mobile-nav' %}
+    {% include 'site-nav' %}
+  </div>
+</nav>
 
 
-              <div class="btn01 pink spmode"><a href="https://www.sc-cal.com/contact/?entry=1"><span>サンプル請求</span></a></div>
-              <div class="contact_box spmode">
-                  <p>サンプル・お見積・お問い合わせ承ります！</p>
-                  <div>
-                      <a href="tel:0362337775"><img src="https://www.sc-cal.com/administrator_system/wp-content/themes/cal/common/img/header/tel-img.png" alt="03-6233-7775"></a>
-                      <span class="reception-time">営業時間　平日9:00～18:00</span>
-                  </div>
-              </div>
-          </nav><!-- / .header-nav -->
-
-
-      </div><!-- / #header-inner -->
-
-  </header>
